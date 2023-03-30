@@ -5,15 +5,17 @@
 // to find ignition conditions
 //
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "math.h"
 #include <stdarg.h>
+#include <math.h>
 
-#include "nr.h"
+extern "C" {
 #include "nrutil.h"
+#include "root.h"
+}
+
 #include "odeint.h"
 #include "eos.h"
 #include "spline.h"
@@ -33,7 +35,6 @@ extern "C" {
   int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
 	     double* trec, double* alpha, double* fluen, double* radius, double*mass);
 }
-
 
 // -------- Global variables ----------
 
@@ -81,18 +82,18 @@ void jacobn(double, double *, double *, double **, int) {};
 
 //------------------------------------------------------------------------
 
-
 int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
 	   double* trec, double* alpha, double* fluen, double* radius, double*mass)
 {
   int flag, n, i;
   double yb, y, dummy, Xbar;
 
+  // added by MCU to prevent variables to be possibly uninitialised
+  y=0.0;
 
   // ------ set up output files ----------------
   //  fp.out=fopen("out/settle","w");
   //fp.ign=fopen("cube","a");
-
 
   // ---------- Initialise parameters --------------------------------------
 
@@ -158,7 +159,6 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
     //    printf("\n-----------------------------\nFLUX=%lg, %lg\n",
     //   0.1*ii, G.Fb);
 
-
      EOS.init(4);
      EOS.A[1]=1.0; EOS.Z[1]=1.0;  // H
      EOS.A[2]=4.0; EOS.Z[2]=2.0;  // He
@@ -175,6 +175,7 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
      flag=0; // flag used to find base of hydrogen layer
 
      // loop
+     // MCU note: kount is initialised somewhere deep inside find_yb();
      for (i=1; i<=ODE.kount; i++) {
 
 	  // column depth
@@ -211,8 +212,6 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
   //  EOS.YZ2()/EOS.Ye(), EOS.Ye(), G.X, G.Fb/(14.62*G.mdot*5.8e21),
   //   EOS.C14AG());
 
-
-
   //printf("z=%lg\n", ODE.get_y(3,ODE.kount));
   yb=0.65*yb;
   *trec  = G.ZZ * yb / (3600.0 * G.Medd * G.mdot);
@@ -226,7 +225,7 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
 
   *alpha = 290. / (1.35 + 6.05 * Xbar);
 
-  *fluen = (4*PI*G.R*G.R*y*9.64e17*(1.35+6.05*Xbar)/G.ZZ)/1e39; //units of 1e39 erg/g
+  *fluen = (4*M_PI*G.R*G.R*y*9.64e17*(1.35+6.05*Xbar)/G.ZZ)/1e39; //units of 1e39 erg/g
 
   //printf("eps (14C+alpha) is %lg\n", EOS.C14AG());
   //printf("eps (3a) is %lg\n", EOS.triple_alpha());
@@ -268,21 +267,18 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
   for (i=1; i<=ODE.kount; i++) output(i);
 */
 
-
   ODE.tidy();
   EOS.tidy();
 
-
-  return 0;
   } // loop through flux
-
 
   // ---------- tidy up ---------------------------------------------
   //  fclose(fp.out);
   //fclose(fp.ign);
 
+  // added by MC - to eliminate warning about missing retval
+  return 0;
 }
-
 
 // ---------------------------------------------------------------------
 
@@ -357,8 +353,6 @@ double dointF(double F)
   return ODE.get_y(2,ODE.kount)-G.Fb;
 }
 
-
-
 double find_yb(void)
   // find ignition depth
 {
@@ -370,6 +364,9 @@ double doint(double yb)
   // integrates the atmosphere
 {
   double F, Tb, x1, x2, heat, cool;
+
+  // added by MCU to prevent variables to be possibly uninitialised
+  F=0.0;
 
   yb=pow(10.0,yb);
 
@@ -419,13 +416,10 @@ double doint(double yb)
   heat*=(F3a-1.0)*(EOS.X[1]/0.143) + 1.0;
   }
 
-
   //printf("yb=%lg, Tb=%lg, heat-cool/cool=%lg\n", yb, Tb, (heat-cool)/cool);
 
   return (heat-cool)/cool;
  }
-
-
 
 // --------------------------- Derivatives -----------------------------
 
@@ -457,9 +451,6 @@ void derivs(double y, double ff[], double dfdy[])
   // hydrostatic balance
   dfdy[3]=-1.0/EOS.rho;
 }
-
-
-
 
 // ---------------------- root finder for density  ---------------------
 
