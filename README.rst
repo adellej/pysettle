@@ -7,7 +7,8 @@ Settling solver - the BEANSp edition
 
 * Forked from settle project by Andrew Cumming
   https://github.com/andrewcumming/settle
-* BEANSp Repo: https://github.com/adellej/beans
+* pySettle Repo: https://github.com/adellej/pysettle
+* BEANSp Repo: https://github.com/adellej/beans (related, using and depends on pySettle)
 
 Features
 --------
@@ -21,6 +22,22 @@ Rotational Evolution During Type I X-Ray Bursts, Andrew Cumming, Lars Bildsten (
 
 Package installation and usage
 ------------------------------
+pySettle is on pyPI (https://pypi.org/project/pySettle/) so installation is easy - either straight or in virtual environment:
+
+   .. code-block::
+   
+      pip install pySettle
+  
+   .. ::
+   
+   .. code-block::
+   
+      from pySettle import settler
+
+(See `test_settle_sft.py <tests/test_settle_sft.py>`_.)
+
+Build and installation from this github repository
+--------------------------------------------------
 
 #. Create and activate a clean conda environment
 
@@ -65,9 +82,10 @@ Package installation and usage
 
    .. code-block::
    
-      from pySettle import settler as se
+      from pySettle import settler
 
-   (See `test_settle_sft.py <https://github.com/ADACS-Australia/beans/blob/adacs_mc/settle/tests/test_settle_sft.py>`_.)
+   (See `test_settle_sft.py <tests/test_settle_sft.py>`_.)
+
 
 Run short functional test (SFT) manually
 ----------------------------------------
