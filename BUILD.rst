@@ -107,38 +107,38 @@ PyPI will not accept just whatever linux compiled packages (wheels). One of many
 
 #. In `docekrfile <docker/settle_manylinux2014_x86_64.dockerfile>`_ select python version and make sure GIT_REPO and SETTLE _DIR are set up correctly. This may take several minutes.
 
-.. code-block::
+   .. code-block::
 
-   ...
-   # select python version - works with 3.6 - 3.11
-   ARG PY_VER_MAJOR=3
-   ARG PY_VER_MINOR=8
-   ...
-   ARG SETTLE_DIR=${BASE_DIR}"/pysettle"
-   ARG GIT_REPO="https://github.com/adellej/pysettle"
-   ...
+      ...
+      # select python version - works with 3.6 - 3.11
+      ARG PY_VER_MAJOR=3
+      ARG PY_VER_MINOR=8
+      ...
+      ARG SETTLE_DIR=${BASE_DIR}"/pysettle"
+      ARG GIT_REPO="https://github.com/adellej/pysettle"
+      ...
 
-.. ::
+   .. ::
 
 #. Repeat the rest of the steps for each python version.
 
-.. code-block::
+   .. code-block::
 
-   docker build -t settle_manylinux2014_x86_64:latest - < ./settle_manylinux2014_x86_64.dockerfile   
+      docker build -t settle_manylinux2014_x86_64:latest - < ./settle_manylinux2014_x86_64.dockerfile   
 
-.. ::
+   .. ::
 
-.. code-block::
+   .. code-block::
   
-   # run and enter the container with bash
-   docker run -it settle_manylinux2014_x86_64:latest bash
+      # run and enter the container with bash
+      docker run -it settle_manylinux2014_x86_64:latest bash
    
-   # cd ${SETTLE_DIR}
-   cd /usr/src/pysettle
-   # publish manylinux wheels on PyPI
-   python3 -m twine upload wheelhouse/*
-   # exit and stop the container when done
-   exit
+      # cd ${SETTLE_DIR}
+      cd /usr/src/pysettle
+      # publish manylinux wheels on PyPI
+      python3 -m twine upload wheelhouse/*
+      # exit and stop the container when done
+      exit
 
-.. ::
+   .. ::
 
