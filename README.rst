@@ -34,10 +34,10 @@ pySettle is on pyPI (https://pypi.org/project/pySettle/) so installation is easy
    
       from pySettle import settler
 
-(See `test_settle_sft.py <tests/test_settle_sft.py>`_.)
+(See the code of test script `test_settle_sft.py <https://github.com/adellej/pysettle/blob/master/tests/test_settle_sft.py>`_ as an example.)
 
 Build and installation from this github repository
 --------------------------------------------------
 
-Please refer to `build instructions <BUILD.rst>`_.
+Please refer to `build instructions <https://github.com/adellej/pysettle/blob/master/BUILD.rst>`_.
 
