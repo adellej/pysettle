@@ -15,9 +15,9 @@ RUN which python3; \
 RUN python3 -m pip install --upgrade build twine
 
 # clone settle and build it
-ARG GIT_REPO="https://github.com/ADACS-Australia/beans.git"
 ARG BASE_DIR="/usr/src"
-ARG SETTLE_DIR=${BASE_DIR}"/beans/settle"
+ARG SETTLE_DIR=${BASE_DIR}"/pysettle"
+ARG GIT_REPO="https://github.com/adellej/pysettle"
 
 RUN cd ${BASE_DIR}; \
     git clone ${GIT_REPO}
@@ -36,9 +36,10 @@ RUN cd ${SETTLE_DIR}; \
 # NOTE this last step is interactive, to enter username and apssword.
 # NOTE Run in na shell inside the container:
 # docker run -it settle_manylinux2014_x86_64:latest bash
-# cd ${SETTLE_DIR} # (cd /usr/src/beans/settle/)
+# cd ${SETTLE_DIR} # (cd /usr/src/pysettle/)
 # NOTE auditwheel puts the fixed wheel into a wheelhouse.
-# NOTE remove "--repository testpypi" to install on real PyPI
+# NOTE use python3 -m twine upload wheelhouse/* to install on real PyPI
 # python3 -m twine upload --verbose --repository testpypi wheelhouse/*
+
     
     
