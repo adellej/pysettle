@@ -39,4 +39,5 @@ pySettle is on pyPI (https://pypi.org/project/pySettle/) so installation is easy
 Build and installation from this github repository
 --------------------------------------------------
 
-See `build instructions <BUILD.rst>`_.
+Please refer to `build instructions <BUILD.rst>`_.
+
