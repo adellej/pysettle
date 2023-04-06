@@ -5,7 +5,7 @@ pySettle
 Build and installation from this github repository
 --------------------------------------------------
 
-This includes compilation of the underlaying C/C++ library (libsettle.so). On Linux, GCC development tools must be installed, on Mac, it works with clang compiler.
+This includes compilation of the underlaying C/C++ library (libsettle.so) and including it in the python package. On Linux, GCC development tools must be installed, on Mac, it works with clang compiler.
 
 #. Clone the pysettle repository
 
@@ -99,4 +99,4 @@ Publish package on PyPI
 .. ::
 
 
-`pySettle on PyPI  https://pypi.org/project/pySettle/ <https://pypi.org/project/pySettle/>`_
+`pySettle on PyPI:  https://pypi.org/project/pySettle/ <https://pypi.org/project/pySettle/>`_
