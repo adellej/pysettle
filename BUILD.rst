@@ -82,7 +82,7 @@ Publish package on PyPI
 
 .. ::
 
-**Test PyPI** : testing all works, but not really publishing to a place where all the world is searching for python packages.
+**Test PyPI** : for testing that all works, but not yet really publishing to a place where all the world is searching for python packages.
 
 .. code-block::
 
@@ -90,7 +90,7 @@ Publish package on PyPI
 
 .. ::
 
-**Real PyPI**
+**The Real PyPI**
 
 .. code-block::
 
@@ -99,3 +99,4 @@ Publish package on PyPI
 .. ::
 
 
+`pySettle on PyPI  https://pypi.org/project/pySettle/ <https://pypi.org/project/pySettle/>`_
