@@ -1,5 +1,5 @@
 ========
-PySettle
+pySettle
 ========
 
 Settling solver - the BEANSp edition
@@ -7,7 +7,8 @@ Settling solver - the BEANSp edition
 
 * Forked from settle project by Andrew Cumming
   https://github.com/andrewcumming/settle
-* BEANSp Repo: https://github.com/adellej/beans
+* pySettle Repo: https://github.com/adellej/pysettle
+* BEANSp Repo: https://github.com/adellej/beans (related, using and depends on pySettle)
 
 Features
 --------
@@ -21,86 +22,22 @@ Rotational Evolution During Type I X-Ray Bursts, Andrew Cumming, Lars Bildsten (
 
 Package installation and usage
 ------------------------------
-
-#. Create and activate a clean conda environment
-
-   The example is for python 3.8, but should work for any version 3.6 to 3.11 as well.
+pySettle is on pyPI (https://pypi.org/project/pySettle/) so installation is easy - either straight or in virtual environment:
 
    .. code-block::
-    
-      # remove existing environment if needed - to start from scratch
-      conda remove -n settle-3.8 --all
-      # create blank conda environment
-      conda create --name settle-3.8 python==3.8.*
-      conda activate settle-3.8
-
-#. Install/upgarde pip, build and local install
-
-   .. code-block::
+   
+      pip install pySettle
   
-      python3 -m pip install --upgrade pip
-      python3 -m pip install --upgrade build
-
-   .. code-block::
-  
-      # test build & local install
-      # The "-e" install does not seem to be reliable for re-install 
-      #       - keeps pulling some old build from somewhere middlewhere.
-      # *Do not use:        python -m pip install -e .*
-      # This is more reliable:
-      python3 -m build
-      python3 -m pip install .
-
    .. ::
    
-   *Note: when workinng on the code, in case of doubts that recent changes got propagated, uninstall & purge the installed module _before_* ``pip install`` *to ensure the installed version has all the recent modifications.*
-
-   .. code-block::
-     
-      python3 -m pip -v uninstall pySettle
-      python3 -m pip -v cache purge
-
-   After this, in that enviroment, pySettle just works from every directorty, providing the conda environment is activated.
-   Imports like:
-
    .. code-block::
    
-      from pySettle import settler as se
+      from pySettle import settler
 
-   (See `test_settle_sft.py <https://github.com/ADACS-Australia/beans/blob/adacs_mc/settle/tests/test_settle_sft.py>`_.)
+(See the code of test script `test_settle_sft.py <https://github.com/adellej/pysettle/blob/master/tests/test_settle_sft.py>`_ as an example.)
 
-Run short functional test (SFT) manually
-----------------------------------------
+Build and installation from this github repository
+--------------------------------------------------
 
-.. code-block::
-
-   cd tests
-   python ./test_settle_sft.py
- 
-
-Publish package on PyPI
-----------------------------------------
-
-.. code-block::
-
-   python3 -m pip install twine
-
-.. ::
-
-**Test PyPI** : testing all works, but not really publishing to a place where all the world is searching for python packages.
-
-.. code-block::
-
-   python3 -m twine upload --repository testpypi dist/*
-
-.. ::
-
-**Real PyPI**
-
-.. code-block::
-
-   python3 -m twine upload dist/*
-
-.. ::
-
+Please refer to `build instructions <https://github.com/adellej/pysettle/blob/master/BUILD.rst>`_.
 
