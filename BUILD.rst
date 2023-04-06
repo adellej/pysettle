@@ -5,6 +5,16 @@ pySettle
 Build and installation from this github repository
 --------------------------------------------------
 
+This includes compilation of the underlaying C/C++ library (libsettle.so). On Linux, GCC development tools must be installed, on Mac, it works with clang compiler.
+
+#. Clone the pysettle repository
+
+   .. code-block::
+    
+      git clone https://github.com/adellej/pysettle
+      cd pysettle
+   
+
 #. Create and activate a clean conda environment
 
    The example is for python 3.8, but should work for any version 3.6 to 3.11 as well.
@@ -17,6 +27,7 @@ Build and installation from this github repository
       conda create --name settle-3.8 python==3.8.*
       conda activate settle-3.8
 
+      
 #. Install/upgarde pip, build and local install
 
    .. code-block::
