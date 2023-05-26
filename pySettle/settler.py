@@ -44,10 +44,13 @@ class Settle(object):
         full: calls settle with all arguments, in case you want to change paramenters,
               it overrides the default F and C, but does not overwrite them
               Takes f, m, x, z, c
-              Returns alpha, trec, fluence
         run : more compact call, which assumes f and c from initialization.
               Takes m, x, and z
-              Returns alpha, trec, fluence
+
+        :param F: the flux from the bottom
+        :param C: include compressional heating (1) or not (0)
+
+        :return: alpha, trec [hr, observer frame], fluence [1e39 erg, observer frame]
         """
         #        path_to_data_file = (
         #            pathlib.Path(__file__).resolve().parent.parent / "settle" / "libsettle.so"
