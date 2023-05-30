@@ -223,7 +223,10 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
   //printf("Xbar=%lg, Q=%lg, Energy=%lg\n", Xbar, 1.6+4.0*Xbar,
   //       4*PI*G.R*G.R*y*9.64e17*(1.6+4.0*Xbar)/ZZ);
 
-  *alpha = 290. / (1.35 + 6.05 * Xbar);
+  // value of 290 was incorrect; correct calculation also depends on redshift
+  // updated prefactor is the mass energy of 1u
+  //*alpha = 290. / (1.35 + 6.05 * Xbar);
+  *alpha = 931.5 *(G.ZZ-1.)/G.ZZ / (1.35 + 6.05 * Xbar);
 
   *fluen = (4*M_PI*G.R*G.R*y*9.64e17*(1.35+6.05*Xbar)/G.ZZ)/1e39; //units of 1e39 erg/g
 
