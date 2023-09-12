@@ -222,3 +222,35 @@ class Settle(object):
             )
 
             return A.value, T.value, E.value
+
+
+    def summary(self, mdot=None, Q_b=0.3, X=[0.7, 0.5, 0.3, 0.1, 0.01],
+        Z=0.016, **kwargs):
+        """
+        Generate a summary plot showing burst rate as a function of mdot
+	for a few different compositions, to replicate figure 1 from
+        Galloway et al. 2006
+
+        :param mdot: range of mdot values (relative to Eddington)
+        :param X: list of X values to plot
+
+        :returns: plot
+        """
+
+        import matplotlib.pyplot as plt
+
+        if mdot is None:
+            mdot = numpy.arange(0.01, 0.17, 0.002),
+
+        for _X in X:
+            rate = []
+            for _mdot in mdot:
+                res = settl.full(Q_b, _mdot, _X, Z, 0, 10., 1.4)
+                rate.append(1./res[1])
+    
+            plt.plot(mdot,rate,label='$X_0= {}$'.format(_X))
+        plt.yscale('log')
+        plt.legend()
+        plt.ylim(1e-3,0.6)
+
+        plt.show()
