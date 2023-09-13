@@ -222,3 +222,46 @@ class Settle(object):
             )
 
             return A.value, T.value, E.value
+
+
+    def summary(self, mdot=None, X=[0.7, 0.5, 0.3, 0.1, 0.01], Q_b=0.3, 
+        Z=0.016, show=True, **kwargs):
+        """
+        Generate a summary plot showing burst rate as a function of mdot
+	for a few different compositions, to replicate figure 1 from
+        Galloway et al. 2006
+
+        :param mdot: range of mdot values (relative to Eddington)
+        :param X: list of X values to plot
+        :param Q_b: base flux for input to settle (common for all plots)
+        :param Z: CNO metallicity (common for all plots)
+        :param show: default is to show the plot, set to False if you want
+          to add some elements (e.g. for a model comparison)
+
+        :returns: plot
+        """
+
+        import matplotlib.pyplot as plt
+
+        if mdot is None:
+            mdot = numpy.arange(0.01, 0.17, 0.002)
+
+        fig = plt.figure(**kwargs)
+
+        for _X in X:
+            rate = []
+            for _mdot in mdot:
+                res = self.full(Q_b, _mdot, _X, Z, 0, 10., 1.4)
+                rate.append(1./res[1])
+    
+            plt.plot(mdot,rate,label='$X_0= {}$'.format(_X))
+        plt.yscale('log')
+        plt.legend()
+        plt.ylim(1e-3,0.6)
+        plt.xlabel('Accretion rate [$\dot{m}_\mathrm{Edd}$]')
+        plt.ylabel('Burst rate [hr$^{-1}$]')
+
+        if show:
+            plt.show()
+
+        return fig
