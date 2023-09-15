@@ -38,11 +38,14 @@ def test_SFT():
         print("settl.full() test - check expected result.")
         res = settl.full(F=0.1, M=0.1, X=0.7, Z=0.02, C=0, R=11.2, Ma=1.4)
         print(res)
+        # alpha,tdel, E_b
+        # result = np.allclose(res, [66.32432920153866, 4.630885096736736, 7.516383459074593])
         # updated here with the new (corrected) alpha calculation, for
         # v0.1.3 and later
-        # result = np.allclose(res, [66.32432920153866, 4.630885096736736, 7.516383459074593])
-        result = np.allclose(res, [43.846559833302855, 4.630885096736736, 7.516383459074593])
-        # alpha,tdel, E_b
+        # result = np.allclose(res, [43.846559833302855, 4.630885096736736, 7.516383459074593])
+        # and now with the removal of the recurrence time scaling for
+        # v1.2.0 and later
+        result = np.allclose(res, [43.846559833302855, 7.124438610364355, 7.516383459074704])
     except:
         raise AssertionError("Settle SFT failed - some error occurred!")
 
