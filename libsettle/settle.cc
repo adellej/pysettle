@@ -232,10 +232,13 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
   //printf("Xbar=%lg, Q=%lg, Energy=%lg\n", Xbar, 1.6+4.0*Xbar,
   //       4*PI*G.R*G.R*y*9.64e17*(1.6+4.0*Xbar)/ZZ);
 
-  // value of 290 was incorrect; correct calculation also depends on redshift
+  // value of 290 was incorrect; correct calculation also depends on
+  // redshift, via the Q_grav value
   // updated prefactor is the mass energy of 1u
+  // we multiply by G.ZZ to calculate the value in the observers frame (as
+  // for the other parameters) - dkg 2023 Sep
   //*alpha = 290. / (1.35 + 6.05 * Xbar);
-  *alpha = 931.5 *(G.ZZ-1.)/G.ZZ / (1.35 + 6.05 * Xbar);
+  *alpha = 931.5 *(G.ZZ-1.)/G.ZZ / (1.35 + 6.05 * Xbar) * G.ZZ;
 
   *fluen = (4*M_PI*G.R*G.R*y*9.64e17*(1.35+6.05*Xbar)/G.ZZ)/1e39; //units of 1e39 erg/g
 
