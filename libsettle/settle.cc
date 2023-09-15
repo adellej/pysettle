@@ -213,7 +213,16 @@ int mainer(double* flu, double* Z, double* X, double* mdo, int* docomp,
   //   EOS.C14AG());
 
   //printf("z=%lg\n", ODE.get_y(3,ODE.kount));
-  yb=0.65*yb;
+
+  // The line below was introduced to improve the agreement between settle
+  // and Kepler, by Goodwin et al. (2019). The goal was to reduce the
+  // ignition depth to better match the recurrence time and fluence;
+  // however because the fluence is calculated from y and not yb, it seems
+  // this correction would only be partially successful
+  // For later versions we make any corrections in the Python code to
+  // avoid changes to the c code - dkg 2023 Sep.
+  // yb=0.65*yb;
+
   *trec  = G.ZZ * yb / (3600.0 * G.Medd * G.mdot);
 
   //printf("Recurrence time =%lg hours\n", *trec);

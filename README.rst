@@ -13,12 +13,22 @@ Settling solver - the BEANSp edition
 Features
 --------
 
-This code computes ignition conditions for Type I X-ray bursts using a multi-zone model of the accreting layer (including hot CNO hydrogen burning, but not helium burning), but a one-zone ignition criterion. For more details, see Cumming & Bildsten (2000).
+This code computes ignition conditions for Type I X-ray bursts using a
+multi-zone model of the accreting layer (including hot CNO hydrogen
+burning, but not helium burning), via a one-zone ignition criterion. For
+more details, see
+`Cumming & Bildsten (2000) <https://iopscience.iop.org/article/10.1086/317191>`_.
+
+The code contains updates and improvements as described in `Goodwin et al.
+(2019) <https://academic.oup.com/mnras/article/490/2/2228/5572467>`_
+and subsequent work since.
 
 Credits
 -------
 
-Rotational Evolution During Type I X-Ray Bursts, Andrew Cumming, Lars Bildsten (2000) - https://arxiv.org/abs/astro-ph/0004347
+The original code was written by Andrew Cumming, with subsequent
+modifications and updates by Adelle J. Goodwin, Martin Cupak, & Duncan K.
+Galloway
 
 Package installation and usage
 ------------------------------
